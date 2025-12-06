@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Work | ROLAND JACOB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="nav-brand" href="index.html">ROLAND JACOB</a>
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>My Work</h1>
+        <h2>Featured Projects</h2>
+      </div>
+    </section>
+
+      <div class="project-grid">
+      <a href="project-canva.html" class="card-link" data-title="Canva Project" data-desc="A project showing design skill using Canva and translating visuals to HTML/CSS." data-image="images/canva-project.jpg" data-video="videos/canva-project.mp4" data-tags="HTML,CSS">
+        <article class="project-card">
+          <img src="images/canva-project.jpg" alt="Canva project">
+          <h3>Canva Project</h3>
+          <p>A project showing design skill using Canva  .</p>
+        </article>
+      </a>
+    
+      <a href="project-wireframe.html" class="card-link" data-title="Wireframe Project" data-desc="Wireframing and layout experiments focusing on responsive behavior." data-image="images/wireframe-project.jpg" data-tags="HTML,CSS">
+        <article class="project-card">
+          <img src="images/wireframe.png" alt="Wireframe project">
+          <h3>Wireframe Project</h3>
+          <p>Wireframing and layout experiments focusing on responsive behavior.</p>
+  
+        </article>
+      </a>
+      <a href="project-bmi.html" class="card-link" data-title="BMI Calculator" data-desc="A small interactive calculator to practice DOM and JavaScript logic." data-image="images/bmi-calculator.jpg" data-tags="HTML,JS">
+        <article class="project-card">
+          <img src="images/Screenshot 2025-11-25 163449.png" alt="BMI calculator">
+          <h3>BMI Calculator</h3>
+          <p>A small interactive calculator that calculates the boby mass.</p>
+          
+        </article>
+      </a>
+    </div>
+    </section>
+  
+    <script>
+      (function(){
+        const previewMedia = document.getElementById('preview-media');
+        const previewTitle = document.getElementById('preview-title');
+        const previewDesc = document.getElementById('preview-desc');
+        const previewTags = document.getElementById('preview-tags');
+
+        function setPreview({title, desc, image, video, tags}){
+          // remove existing media
+          previewMedia.innerHTML = '';
+          if(video){
+            const v = document.createElement('video');
+            v.src = video;
+            v.controls = true;
+            v.playsInline = true;
+            v.poster = image || '';
+            previewMedia.appendChild(v);
+          } else {
+            const img = document.createElement('img');
+            img.src = image || '';
+            img.alt = title || 'Project preview';
+            previewMedia.appendChild(img);
+          }
+
+          previewTitle.textContent = title || '';
+          previewDesc.textContent = desc || '';
+          previewTags.innerHTML = '';
+          if(tags){
+            tags.split(',').forEach(t=>{
+              const s = document.createElement('span');
+              s.className = 'tech-tag';
+              s.textContent = t.trim();
+              previewTags.appendChild(s);
+            });
+          }
+        }
+
+        // initialize with first card
+        const first = document.querySelector('.project-grid .card-link');
+        if(first){
+          setPreview({title:first.dataset.title, desc:first.dataset.desc, image:first.dataset.image, video:first.dataset.video, tags:first.dataset.tags});
+        }
+
+        document.querySelectorAll('.project-grid .card-link').forEach(link=>{
+          link.addEventListener('mouseenter', ()=> setPreview({title:link.dataset.title, desc:link.dataset.desc, image:link.dataset.image, video:link.dataset.video, tags:link.dataset.tags}));
+          link.addEventListener('focus', ()=> setPreview({title:link.dataset.title, desc:link.dataset.desc, image:link.dataset.image, video:link.dataset.video, tags:link.dataset.tags}));
+        });
+      })();
+    </script>
+  </main>
+
+  <footer class="site-footer">
+    <p>More projects coming soon.</p>
+  </footer>
+</body>
+</html>
